@@ -61,6 +61,7 @@ function onSuccess(imageData) {
     else if(/(iphone)|(ipad)/i.test(navigator.userAgent)){
         var image = document.getElementById('defImg');
     	image.src = "data:image/jpeg;base64," + imageData;
+		window.foto = imageData;
     }
 }
 
