@@ -11,14 +11,14 @@ jquery: true
 $(document).ready(function () {
     var inlogCode = localStorage.getItem('loginCode');
     jQuery.ajax({
-            type: 'GET',
-            //url: 'http://api.adaytoshare.be/1/platform/check_code?code=' + inlogCode,
-            url: 'http://api.adaytoshare.be/1/platform/check_code',
-            data: {
-                code: inlogCode
-            },
-            dataType: 'json',
-            success: function (responseData) {
+        type: 'GET',
+        //url: 'http://api.adaytoshare.be/1/platform/check_code?code=' + inlogCode,
+        url: 'http://api.adaytoshare.be/1/platform/check_code',
+        data: {
+            code: inlogCode
+        },
+        dataType: 'json',
+        success: function (responseData) {
 
             $('.naam_event').text(responseData.album_name);
 
@@ -204,16 +204,19 @@ function LikeSturenNaarServer(messageID) {
     var code = localStorage.getItem('loginCode');
     var data = {
         code: code,
-        messageID: "388"
+        messageID: "400"
     };
     var json1 = JSON.stringify(data);
     $.ajax({
         type: 'POST',
         //url:  "http://api.adaytoshare.be/1/platform/like?code="+code+"&messageID="+messageID,
-        url: "http://api.adaytoshare.be/1/platform/like?code=951951&messageID=388",
+        url: "http://api.adaytoshare.be/1/platform/like", //?code=951951&messageID=388",
         // data: {code: code, messageID: messageID},
-        data: json1,
-        dataType: 'json',
+        data: {
+            code: "951951",
+            messageID: "400"
+        },
+        //dataType: 'json',
         success: function (responseData) {
             alert('liked');
         },

@@ -8,17 +8,16 @@ jquery: true
 
 
 $(document).ready(function () {
-    // var sendData = {url: 'http://api.adaytoshare.be/1/platform/check_code?code=' + inlogCode};
+
     var inlogCode = localStorage.getItem('loginCode');
     var naam = localStorage.getItem('naam');
     jQuery.ajax({
-        //type: 'GET',
-
-        url: 'http://api.adaytoshare.be/1/platform/check_code?code=' + inlogCode,
-        //url: 'crosscall.php',
-        //data: JSON.stringify({code:'951951'}),
+        type: 'GET',
+        url: 'http://api.adaytoshare.be/1/platform/check_code',
+        data: {
+            code: inlogCode
+        },
         dataType: 'json',
-        //data: sendData,
         success: function (responseData) {
 
             $('.naam_event').text(responseData.album_name);
@@ -33,7 +32,7 @@ $(document).ready(function () {
 });
 
 /* --------------verzenden via url ------------------------- */
-
+/*
 $(document).ready(function () {
     document.getElementById("send_message").addEventListener("click", verzenden, false);
 
@@ -78,14 +77,16 @@ $(document).ready(function () {
         });
     }
 });
-
+*/
 
 /* --------------verzenden via json parameters-------------------------- */
-/*
+
 $(document).ready(function () {
+
     document.getElementById("send_message").addEventListener("click", verzenden, false);
 
     function verzenden() {
+
 
         var message = $('.bericht').val();
         var inlogCode = localStorage.getItem('loginCode');
@@ -93,35 +94,68 @@ $(document).ready(function () {
         var email = localStorage.getItem('email');
         var public_private = $('.public_private').text();
         var pb = 1;
+
+
         if (public_private == "privé")
             pb = 0;
 
-        $.ajax({
-            url: 'http://api.adaytoshare.be/1/guestbook/post',
-            headers: {"cache-control": "no-cache"},
-            type: 'POST',
-            cache: false,
-           // data: 'code='+inlogCode+"&from="+from+"&message="+message,
-            data: {code: inlogCode, from: from, message: message},
-            //dataType:'json',
-            success: function (responseData) {
-                alert(inlogCode);
-                for (var key in responseData) {
-                    alert(key + ": " + responseData[key]);
-                }
-                window.location = "timeline.html";
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert("fout bij het versturen");
-            }
-        });
-        
-//        $.post( "http://api.adaytoshare.be/1/guestbook/post", { code: "951951", from: "Test", message: 'Hallo!' })
- // .done(function( data ) {
-//    alert( "Data Loaded: ");
-  //  for (var key in data) {
-                   /* alert(key + ": " + data[key]);
-                }
-  });*/
-/* }
-});*/
+        if ($("#defImg").attr("src") !== "") {
+            verzendenMetFoto(inlogCode, from, message, pb, email);
+
+        } else {
+            verzendenZonderFoto(inlogCode, from, message, pb, email);
+        }
+
+    }
+});
+
+
+var verzendenZonderFoto = function (inlogCode, from, message, pb, email) {
+    var postData = 'code=' + inlogCode + '&from=' + from + '&message=' + message + '&public=' + pb + '&email=' + email;
+    var url = 'http://api.adaytoshare.be/1/guestbook/post';
+
+    var sendData = {
+        'url': url,
+        'postData': postData
+    };
+
+    $.ajax({
+        url: 'http://dtdl.ehb.be/~jan.klaas.vdm/crosscall.php',
+        //url: 'http://api.adaytoshare.be/1/guestbook/post?code=' + inlogCode + '&from=' + from + '&message=' + message,
+        type: 'POST',
+        data: sendData,
+        // async: false,
+        dataType: 'json',
+        cache: false,
+        success: function (responseData) {
+            window.location = "timeline.html";
+        },
+        error: function (err) {
+            alert('error');
+        }
+    });
+};
+
+var verzendenMetFoto = function (inlogCode, from, message, pb, email) {
+    $.ajax({
+        url: "http://api.adaytoshare.be/1/guestbook/post_with_media_base64",
+        data: {
+            code: inlogCode,
+            from: from,
+            photo: foto,
+            message: message,
+            public: pb,
+            email: email
+        },
+        async: false,
+        datatype: 'json',
+        type: 'post',
+        // async: false,
+        success: function (data) {
+
+            window.location = "timeline.html";
+        }
+
+    });
+
+};

@@ -8,7 +8,7 @@ jquery: true
 
 
 $(document).ready(function () {
-    // var sendData = {url: 'http://api.adaytoshare.be/1/platform/check_code?code=' + inlogCode};
+
     var inlogCode = localStorage.getItem('loginCode');
     var naam = localStorage.getItem('naam');
     jQuery.ajax({

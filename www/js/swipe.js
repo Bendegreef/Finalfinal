@@ -1,4 +1,3 @@
-
 $(function () {
     $(document).swipe({
         //Generic swipe handler for all directions
