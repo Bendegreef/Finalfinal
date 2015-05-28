@@ -57,7 +57,7 @@ function onSuccess(imageData) {
 	document.getElementById("defImg").setAttribute('crossOrigin', 'anonymous');
 	document.getElementById("defImg").src = dataURL; //afbeelding toekennen
 	document.getElementById("defImg").style.display = "block";
-    window.foto = dataURL.replace("data:image/jpeg;base64,", "");
+    window.foto = dataURL;
     }
     else if(/(iphone)|(ipad)/i.test(navigator.userAgent)){
         var image = document.getElementById('defImg');
