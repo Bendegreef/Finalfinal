@@ -31,7 +31,8 @@ function takePicture(e) {
 			quality: 40,
 			destinationType: navigator.camera.DestinationType.DATA_URL,
 			allowEdit: true,
-			correctOrientation: true
+			correctOrientation: true,
+			encodingType: navigator.camera.EncodingType.JPEG
 		});
 	}
 }
