@@ -41,7 +41,8 @@ $(document).ready(function () {
 	document.getElementById("logoutbutton").addEventListener("click", logout, false);
 });
 
-function onlineplatform(e) {
+function onlineplatform() {
+	alert("click");
 	//window.open("http://ehb.adaytoshare.be/adts/guestbook");
 	window.open("http://ehb.adaytoshare.be/adts/guestbook", "_system");
 	//window.open(encodeURI('http://ehb.adaytoshare.be/adts/guestbook'), '_system', 'location=no', 'target=blank');
