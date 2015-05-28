@@ -3,13 +3,13 @@
 
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "be.erasmushogeschool.hello-camera"
+        id        = "be.erasmushogeschool.adts"
         version   = "1.0.0">
 
     <name>A Day to Share</name>
 
     <description>
-        A day to share maakt het mogelijk om een uniek gastenboek te maken en ditnzo eenvoudig mogelijk!
+        A Day to Share maakt het mogelijk om een uniek gastenboek te maken en dit zo eenvoudig mogelijk!
     </description>
 
     <author href="http://erasmushogeschool.be" email="kenny.van.meines@student.ehb.be">

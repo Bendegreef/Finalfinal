@@ -92,9 +92,10 @@ var ophalenBerichten = function (code, limiet, offset, liketeller) {
 
                 likes(liketeller, responseData.messages[i].messageID);
                 liketeller++;
-            }
 
+            }
             ongepast();
+
         },
         error: function (responseData) {
             alert("server niet beschikbaar");
@@ -175,6 +176,7 @@ var ongepast = function () {
                 });
             });
         });
+
     });
 
     $('.gekleurdebalk ul').click(function () {
@@ -206,22 +208,88 @@ function LikeSturenNaarServer(messageID) {
         code: code,
         messageID: "400"
     };
-    var json1 = JSON.stringify(data);
-    $.ajax({
+
+    /*  $.ajax({
+          type: 'POST',
+          //url:  "http://api.adaytoshare.be/1/platform/like?code="+code+"&messageID="+messageID,
+          url: "http://api.adaytoshare.be/1/platform/like", //?code=951951&messageID=388",
+          // data: {code: code, messageID: messageID},
+          data: {
+              code: "951951",
+              messageID: "400"
+          },
+          //dataType: 'json',
+          success: function (responseData) {
+              alert('liked');
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+              alert("fout bij het liken, geen server gevonden");
+          }
+      });*/
+
+    /* $.ajax({
+        url: "http://api.adaytoshare.be/1/platform/like",
+        data: {code: '951951', messageID: '614'},
         type: 'POST',
-        //url:  "http://api.adaytoshare.be/1/platform/like?code="+code+"&messageID="+messageID,
-        url: "http://api.adaytoshare.be/1/platform/like", //?code=951951&messageID=388",
-        // data: {code: code, messageID: messageID},
-        data: {
-            code: "951951",
-            messageID: "400"
-        },
-        //dataType: 'json',
+        async: false,
+        datatype: 'json',
+        success: function (data) {
+            if(data.success === 1) {
+alert('liked');
+            } 
+        }
+    });*/
+    var sendData = {
+        'url': 'http://api.adaytoshare.be/1/platform/like',
+        'postData': 'code=' + inlogCode + '&messageID=' + messageID
+    };
+
+    $.ajax({
+        url: 'http://dtdl.ehb.be/~jan.klaas.vdm/crosscall.php',
+        //url: 'http://api.adaytoshare.be/1/guestbook/post?code=' + inlogCode + '&from=' + from + '&message=' + message,
+        type: 'POST',
+        data: sendData,
+        // async: false,
+        dataType: 'json',
+        cache: false,
         success: function (responseData) {
-            alert('liked');
+            alert(inlogCode + " " + messageID);
         },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert("fout bij het liken, geen server gevonden");
+        error: function (err) {
+            alert('error');
         }
     });
 }
+
+
+
+
+
+
+
+
+var ongepastSturenNaarServer = function (messageID) {
+    var code = localStorage.getItem('loginCode');
+
+    $.ajax({
+        url: 'http://api.adaytoshare.be/1/guestbook/report',
+        type: 'POST',
+        data: {
+            code: code,
+            messageID: messageID
+        },
+        dataType: 'json',
+        //cache: false,
+        success: function (responseData) {
+            alert(inlogCode + " " + messageID);
+
+            for (var key in responseData) {
+                alert(key + ": " + responseData[key]);
+            }
+
+        },
+        error: function (err) {
+            alert('error');
+        }
+    });
+};
