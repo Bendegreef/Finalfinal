@@ -43,7 +43,8 @@ $(document).ready(function () {
 
     function onlineplatform() {
         //window.location = "http://ehb.adaytoshare.be/adts/guestbook";
-        window.open("http://ehb.adaytoshare.be/adts/guestbook", '_system');
+       window.open("http://ehb.adaytoshare.be/adts/guestbook", '_system');
+		//window.open(encodeURI('http://ehb.adaytoshare.be/adts/guestbook'), '_system', 'location=no', 'target=blank');
     }
 
     function logout() {
