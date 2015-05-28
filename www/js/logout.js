@@ -9,27 +9,27 @@ jquery: true
 
 $(document).ready(function () {
 
-    var inlogCode = localStorage.getItem('loginCode');
-    var naam = localStorage.getItem('naam');
-    jQuery.ajax({
-            type: 'GET',
-            url: 'http://api.adaytoshare.be/1/platform/check_code',
-            data: {
-                code: inlogCode
-            },
-            dataType: 'json',
-            success: function (responseData) {
+	var inlogCode = localStorage.getItem('loginCode');
+	var naam = localStorage.getItem('naam');
+	jQuery.ajax({
+		type: 'GET',
+		url: 'http://api.adaytoshare.be/1/platform/check_code',
+		data: {
+			code: inlogCode
+		},
+		dataType: 'json',
+		success: function (responseData) {
 
-            $('.naamlogout').text(naam);
-            $('.eventnaamlogout').text(responseData.album_name);
-            $('.eventcodelogout').text(inlogCode);
+			$('.naamlogout').text(naam);
+			$('.eventnaamlogout').text(responseData.album_name);
+			$('.eventcodelogout').text(inlogCode);
 
-        },
-        error: function (responseData) {
-            alert("server niet beschikbaar");
-        },
+		},
+		error: function (responseData) {
+			alert("server niet beschikbaar");
+		},
 
-    });
+	});
 });
 
 
@@ -37,21 +37,19 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
-    document.getElementById("onlineplatform").addEventListener("click", onlineplatform, false);
-    document.getElementById("logoutbutton").addEventListener("click", logout, false);
-
-
-    function onlineplatform(e) {
-        //window.open("http://ehb.adaytoshare.be/adts/guestbook");
-		navigator.open("http://ehb.adaytoshare.be/adts/guestbook", "_system");
-		//window.open(encodeURI('http://ehb.adaytoshare.be/adts/guestbook'), '_system', 'location=no', 'target=blank');
-    }
-
-    function logout() {
-        // localStorage.removeItem('naam');
-        //localStorage.removeItem('loginCode');
-        //localStorage.removeItem('email');
-        window.location = "index.html";
-    }
-
+	document.getElementById("onlineplatform").addEventListener("click", onlineplatform, false);
+	document.getElementById("logoutbutton").addEventListener("click", logout, false);
 });
+
+function onlineplatform(e) {
+	//window.open("http://ehb.adaytoshare.be/adts/guestbook");
+	window.open("http://ehb.adaytoshare.be/adts/guestbook", "_system");
+	//window.open(encodeURI('http://ehb.adaytoshare.be/adts/guestbook'), '_system', 'location=no', 'target=blank');
+}
+
+function logout() {
+	// localStorage.removeItem('naam');
+	//localStorage.removeItem('loginCode');
+	//localStorage.removeItem('email');
+	window.location = "index.html";
+}
